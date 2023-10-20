@@ -8,8 +8,7 @@ resource "aws_s3_bucket" "praktyki-kurs-terrafrom-1" {
 
 resource "aws_iam_role" "lambda-resizer-1" {
   name = "lambda-resizer-1"
-  assume_role_policy = <<EOF
-{
+  assume_role_policy = jsonencode({
   "Version": "2012-10-17",
   "Statement": [
     {
@@ -21,14 +20,13 @@ resource "aws_iam_role" "lambda-resizer-1" {
         "Sid": ""
       }
   ]
+})
 }
-EOF
-}
+
 
 resource "aws_iam_role_policy" "lambda-resizer-1" {
   role = aws_iam_role.lambda-resizer-1.name
-  policy = <<EOF
-{
+  policy = jsonencode({
   "Version": "2012-10-17",
   "Statement": [
     {
@@ -38,11 +36,11 @@ resource "aws_iam_role_policy" "lambda-resizer-1" {
       ],
       "Effect": "Allow",
       "Resources": "praktyki-kurs-terraform-lambda-1"
-    }
+    },
   ]
+})
 }
-EOF  
-}
+
 
 
 
